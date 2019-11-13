@@ -8,18 +8,17 @@ class FormCinema extends Component {
       poster: '',
       comment: ''
     }
-    this.onChange = this.onChange.bind(this)
-    this.submitForm = this.postData.bind(this)
+    
   }
 
-  onChange(e) {
+  handleChange = event => {
     this.setState({
-      [e.target.title]: e.target.value,
+      [event.target.name]: event.target.value,
     });
   }
 
-  submitForm(e) {
-    e.preventDefault();
+  handleSubmit = event => {
+    event.preventDefault();
     this.postData();
   }
 
@@ -42,7 +41,7 @@ class FormCinema extends Component {
         if (res.error) {
           alert(res.error);
         } else {
-          alert(`Le film ${res} a été ajouté!`)
+          alert(`Le film ${this.state.title} a été ajouté!`)
         }
       }).catch(e => {
         console.error(e);
@@ -55,7 +54,7 @@ class FormCinema extends Component {
       <div className="FormCinema">
         <h1>Cherche un film!</h1>
 
-        <form onSubmit={this.submitForm}>
+        <form onSubmit={this.handleSubmit}>
           <fieldset>
             <legend>Informations</legend>
             <div className="form-data">
@@ -64,7 +63,7 @@ class FormCinema extends Component {
                 type="text"
                 id="title"
                 name="title"
-                onChange={this.onChange}
+                onChange={this.handleChange}
                 //value={this.state.title}
               />
             </div>
@@ -75,7 +74,7 @@ class FormCinema extends Component {
                 type="url"
                 id="poster"
                 name="poster"
-                onChange={this.onChange}
+                onChange={this.handleChange}
                 //value={this.state.poster}
               />
             </div>
@@ -86,7 +85,7 @@ class FormCinema extends Component {
                 type="text"
                 id="comment"
                 name="comment"
-                onChange={this.onChange}
+                onChange={this.handleChange}
                 //value={this.state.comment}
               />
             </div>
